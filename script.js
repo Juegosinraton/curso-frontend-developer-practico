@@ -5,6 +5,10 @@ const mobileMenu = document.querySelector('.mobile-menu');
 const carrito = document.querySelector('.carrito');
 const itemsCarro = document.querySelector('.product-detail');
 const contenedorProductos = document.querySelector('.cards-container')
+const detalleProducto = document.querySelector('.product-detailC')
+const textoUno = document.querySelector('.primerTexto');
+const textoDos = document.querySelector('.segundoTexto');
+const textoTres =  document.querySelector('.tercerTexto')
 const productos = [
     {name: 'pantalla', price: 220, image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
     {name: 'bike', price:170, image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
@@ -20,6 +24,7 @@ function toggleCuentaOrdenes(){
     if(!cuentaOrdenes.classList.contains('inactive')){
         mobileMenu.classList.add('inactive');
         itemsCarro.classList.add('inactive');
+        detalleProducto.classList.add('inactive');
     }
 } 
 
@@ -28,6 +33,7 @@ function toggleMenuHam(){
     if(!mobileMenu.classList.contains('inactive')){
         itemsCarro.classList.add('inactive');
         cuentaOrdenes.classList.add('inactive');
+        detalleProducto.classList.add('inactive');
     }
 }
 
@@ -36,27 +42,11 @@ function toggleCarrito(){
     if(!itemsCarro.classList.contains('inactive')){
         cuentaOrdenes.classList.add('inactive');
         mobileMenu.classList.add('inactive');
+        detalleProducto.classList.add('inactive');
     }
 }
 
-/*
-      <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <div class="product-info">
-          <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-          </div>
-          <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt="">
-          </figure>
-        </div>
-      </div> 
- 
-*/
-
-function agregarProducto(arr){
-    for(var producto of arr){
+    for(var producto of productos){
       const imgCar = document.createElement('img');
       imgCar.setAttribute('src', './icons/bt_add_to_cart.svg')
 
@@ -82,9 +72,17 @@ function agregarProducto(arr){
       const contenedorCards = document.createElement('div');
       contenedorCards.classList.add('product-card');
       contenedorCards.append(imagenProducto, infoProducto);
+      imagenProducto.addEventListener('click', asideProducto);
 
       contenedorProductos.append(contenedorCards);
+      
+    }
+
+function asideProducto(){
+    detalleProducto.classList.toggle('inactive');
+    if (!detalleProducto.classList.contains('inactive')){
+        cuentaOrdenes.classList.add('inactive');
+        mobileMenu.classList.add('inactive');
+        itemsCarro.classList.add('inactive');
     }
 }
-
-agregarProducto(productos);
